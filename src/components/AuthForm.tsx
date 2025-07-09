@@ -34,7 +34,7 @@ export default function AuthForm({ type }: AuthFormProps) {
           return;
         }
 
-        router.push('/');
+        router.push('/dashboard');
     } else {
 
       const {  error } = await supabase.auth.signUp({
@@ -46,7 +46,7 @@ export default function AuthForm({ type }: AuthFormProps) {
         return;
       }
       alert("Sign-up successful. Please check your email to confirm.");
-      router.push('/'); // or wait until confirmed
+      router.push('/signin'); // or wait until confirmed
     }
       } catch (error) {
        console.error('Auth error:', error);
