@@ -1,5 +1,5 @@
 "use client"
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/src/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 interface AuthFormProps {
