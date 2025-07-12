@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { fetchPolls } from "@/src/lib/fetchPolls";
 import { Poll } from "@/src/types/poll";
 import { useUser } from "@supabase/auth-helpers-react";
-type FileType = 'all' | 'active' | 'ended' | 'mine'
+import Image from "next/image";
+type FileType = "all" | "active" | "ended" | "mine";
 export default function PollListPage() {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [page, setPage] = useState(1);
@@ -28,7 +29,6 @@ export default function PollListPage() {
         setPolls(polls);
         setTotal(total ?? 0);
         console.log({ polls });
-
       } catch (error) {
         console.error("Failed to load polls:", error);
       }
@@ -37,80 +37,76 @@ export default function PollListPage() {
   }, [page, search, filter, user]);
 
   return (
-    <div className="flex p-12 gap-3">
+    <div className="flex p-12 gap-5">
       <div className="w-full flex-[3]">
         <h2 className="text-white font-bold text-lg">PollsApp</h2>
         <div className="text-white pl-3 pt-2 flex flex-col gap-4 font-semibold list-none">
-          <li className="bg-gray-600 p-3 rounded-2xl">Home</li>
-          <li className="bg-gray-600 p-3 rounded-2xl">My Polls</li>
-          <li className="bg-gray-600 p-3 rounded-2xl">Create Poll</li>
-          <li className="bg-gray-600 p-3 rounded-2xl">Profile</li>
+          <li className="bg-[#223649] p-3 rounded-2xl">Home</li>
+          <li className="bg-[#223649] p-3 rounded-2xl">My Polls</li>
+          <li className="bg-[#223649] p-3 rounded-2xl">Create Poll</li>
+          <li className="bg-[#223649] p-3 rounded-2xl">Profile</li>
         </div>
       </div>
 
-      <div className="flex-[7] bg-white">
-        <input type="text" />
+      <div className="flex-[7] pl-8">
+        <input
+          type="text"
+          className="bg-[#223649] w-full p-2 rounded-lg border-[#223649] text-white"
+          placeholder="Search for pool"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        {/* filters */}
+        <div className="flex gap-3 mt-5">
+          <button
+            className="bg-[#223649] rounded-lg p-2 cursor-pointer"
+            onClick={() => setFilter("all")}
+          >
+            All Polls
+          </button>
+          <button
+            className="bg-[#223649] rounded-lg p-2 cursor-pointer"
+            onClick={() => setFilter("active")}
+          >
+            Active
+          </button>
+          <button
+            className="bg-[#223649] rounded-lg p-2 cursor-pointer"
+            onClick={() => setFilter("ended")}
+          >
+            Ended
+          </button>
+          <button
+            className="bg-[#223649] rounded-lg p-2 cursor-pointer"
+            onClick={() => setFilter("mine")}
+          >
+            MyPolls
+          </button>
+        </div>
+        {/* all polls details */}
+        <div className="flex gap-5 flex-wrap">
+          {polls.map((poll) => (
+            <li key={poll.id} className="w-[150px] h-[230px] rounded-xl mt-5">
+              <Image
+                src="/vote.png"
+                alt="Logo"
+                className="w-full rounded-xl h-[150px]"
+                width={200}
+                height={100}
+              />
 
+              <h2 className="text-white font-semibold mt-1 pl-1">
+                {poll.question}
+              </h2>
+              <p className="text-[#223649] text-md font-semibold pl-1">
+                Author
+              </p>
+              <p className="text-[#223649] text-md font-semibold pl-1">
+                {poll.voteCount}
+              </p>
+            </li>
+          ))}
+        </div>
       </div>
-     
     </div>
-
   );
 }
-
-
-
-//  <div className="p-6  mx-auto space-y-4 flex-[7]">
-//         <div className="flex items-center gap-4">
-//           <input
-//             type="text"
-//             placeholder="Search polls..."
-//             className="border p-2 rounded w-full"
-//             value={search}
-//             onChange={(e) => setSearch(e.target.value)}
-//           />
-//           <select
-//             className="border p-2 rounded"
-//             value={filter}
-//             onChange={(e) => setFilter(e.target.value as FileType)}
-//           >
-//             <option value="all">All</option>
-//             <option value="active">Active</option>
-//             <option value="ended">Ended</option>
-//             {user && <option value="mine">My Polls</option>}
-//           </select>
-//         </div>
-
-//         <ul className="space-y-4">
-//           {polls.map((poll) => (
-//             <li key={poll.id} className="border p-4 rounded shadow">
-//               <h3 className="text-lg font-bold">{poll.question}</h3>
-//               <p className="text-sm text-gray-600">
-//                 Ends: {poll.endDate ? new Date(poll.endDate).toLocaleString() : "No end date"}
-//               </p>
-//               <a href={`/poll/${poll.id}`} className="text-blue-600 underline">
-//                 View Poll
-//               </a>
-//             </li>
-//           ))}
-//         </ul>
-
-//         {/* Pagination */}
-//         <div className="flex justify-between pt-4">
-//           <button
-//             disabled={page === 1}
-//             onClick={() => setPage(page - 1)}
-//             className="bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
-//           >
-//             Previous
-//           </button>
-//           <span className="px-4 py-2">Page {page}</span>
-//           <button
-//             disabled={page * pageSize >= total}
-//             onClick={() => setPage(page + 1)}
-//             className="bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
-//           >
-//             Next
-//           </button>
-//         </div>
-//       </div>
