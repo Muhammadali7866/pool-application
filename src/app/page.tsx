@@ -1,20 +1,66 @@
-import Image from 'next/image';
+"use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleGetStarted = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push("/signin");
+  };
   return (
-    <div className="relative w-full h-screen">
-      <div className="absolute top-0 left-0 w-full z-10 flex items-center justify-between p-6 text-white bg-black bg-opacity-50"> <div className="text-2xl font-bold">MyApp</div>
-        <div className="space-x-4">
-          <a href="/signin" className="hover:underline">Sign In</a>
-          <a href="/signup" className="hover:underline">Sign Up</a>
-        </div></div>
-      <Image
-        src="/vote.png"
-        alt="Full Screen Image"
-        fill
-        className="object-cover"
-        priority
-      />
+    <div className="w-full h-screen flex flex-col">
+      <nav className="p-4  text-white flex list-none justify-between">
+        <div>
+          <li>Polify</li>
+        </div>
+        <div className="flex gap-3">
+          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
+            About
+          </li>
+          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
+            Contact
+          </li>
+          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
+            <a href="/signup" className="hover:underline">
+              Sign Up
+            </a>
+          </li>
+          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
+            <a href="/signin" className="hover:underline">
+              Sign In
+            </a>{" "}
+          </li>
+        </div>
+      </nav>
+      <hr />
+
+      {/* hero image */}
+      <div className="relative bg-white h-[500px] w-[1100px] rounded-2xl ml-[280px] mt-5 overflow-hidden">
+        <Image
+          src="/voting2.webp"
+          alt="Full Screen Image"
+          fill
+          className="object-cover rounded-2xl"
+          priority
+        />{" "}
+        <div className="absolute inset-0 flex flex-col items-center justify-center  text-black text-center rounded-2xl">
+          <h2 className="text-3xl font-bold mb-4">
+            Create and Participate in Real-Time Polls
+          </h2>
+          <p className="mb-4">
+            Engage your audience with interactive polls and get instant
+            feedbacks
+          </p>
+          <button
+            className="px-6 py-2 rounded-2xl bg-white text-black font-semibold hover:bg-gray-500 cursor-pointer"
+            onClick={handleGetStarted}
+          >
+            Get Started
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
