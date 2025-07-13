@@ -5,6 +5,7 @@ import { fetchPolls } from "@/src/lib/fetchPolls";
 import { Poll } from "@/src/types/poll";
 import { useUser } from "@supabase/auth-helpers-react";
 import Image from "next/image";
+import Link from "next/link";
 type FileType = "all" | "active" | "ended" | "mine";
 export default function PollListPage() {
   const [polls, setPolls] = useState<Poll[]>([]);
@@ -43,7 +44,9 @@ export default function PollListPage() {
         <div className="text-white pl-3 pt-2 flex flex-col gap-4 font-semibold list-none">
           <li className="bg-[#223649] p-3 rounded-2xl">Home</li>
           <li className="bg-[#223649] p-3 rounded-2xl">My Polls</li>
-          <li className="bg-[#223649] p-3 rounded-2xl">Create Poll</li>
+          <li className="bg-[#223649] p-3 rounded-2xl">
+            <Link href="/poll">Create Poll</Link>
+          </li>
           <li className="bg-[#223649] p-3 rounded-2xl">Profile</li>
         </div>
       </div>
