@@ -1,9 +1,11 @@
 import AuthForm from "@/src/components/AuthForm";
+import Navbar from "../../components/Navbar";
 
 export default function SignUp() {
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-800">
+      <Navbar />
+      <div className=" flex justify-center mt-5">
         <AuthForm type="signup" />
       </div>
     </>

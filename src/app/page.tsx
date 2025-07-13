@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   const router = useRouter();
@@ -11,29 +12,7 @@ export default function Home() {
   };
   return (
     <div className="w-full h-screen flex flex-col">
-      <nav className="p-4  text-white flex list-none justify-between">
-        <div>
-          <li>Polify</li>
-        </div>
-        <div className="flex gap-3">
-          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
-            About
-          </li>
-          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
-            Contact
-          </li>
-          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
-            <a href="/signup" className="hover:underline">
-              Sign Up
-            </a>
-          </li>
-          <li className="bg-[#223649] px-4 py-1 rounded-2xl cursor-pointer font-serif ">
-            <a href="/signin" className="hover:underline">
-              Sign In
-            </a>{" "}
-          </li>
-        </div>
-      </nav>
+      <Navbar />
       <hr />
 
       {/* hero image */}
