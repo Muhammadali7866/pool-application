@@ -88,25 +88,27 @@ export default function PollListPage() {
         {/* all polls details */}
         <div className="flex gap-5 flex-wrap">
           {polls.map((poll) => (
-            <li key={poll.id} className="w-[150px] h-[230px] rounded-xl mt-5">
-              <Image
-                src="/vote.png"
-                alt="Logo"
-                className="w-full rounded-xl h-[150px]"
-                width={200}
-                height={100}
-              />
+            <Link href={`/poll/${poll.id}`} key={poll.id}>
+              <li key={poll.id} className="w-[150px] h-[230px] rounded-xl mt-5">
+                <Image
+                  src="/vote.png"
+                  alt="Logo"
+                  className="w-full rounded-xl h-[150px]"
+                  width={200}
+                  height={100}
+                />
 
-              <h2 className="text-white font-semibold mt-1 pl-1">
-                {poll.question}
-              </h2>
-              <p className="text-[#223649] text-md font-semibold pl-1">
-                Author
-              </p>
-              <p className="text-[#223649] text-md font-semibold pl-1">
-                {poll.voteCount}
-              </p>
-            </li>
+                <h2 className="text-white font-semibold mt-1 pl-1">
+                  {poll.question}
+                </h2>
+                <p className="text-[#223649] text-md font-semibold pl-1">
+                  Author
+                </p>
+                <p className="text-[#223649] text-md font-semibold pl-1">
+                  {poll.voteCount}
+                </p>
+              </li>
+            </Link>
           ))}
         </div>
       </div>
